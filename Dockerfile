@@ -14,4 +14,5 @@ run apt-get install -y mysql-server
 
 expose 3306
 
-cmd ["mysqld"]
+ADD ./start-mysql.sh /tmp/start-mysql.sh
+RUN /bin/sh /tmp/start-mysql.sh
