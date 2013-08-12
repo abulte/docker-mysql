@@ -8,12 +8,14 @@ run ln -s /bin/true /sbin/initctl
 
 # install mysql
 run apt-get update
-run echo "mysql-server-5.5 mysql-server/root_password password root4mysql" | debconf-set-selections
-run echo "mysql-server-5.5 mysql-server/root_password_again password root4mysql" | debconf-set-selections
 run apt-get install -y mysql-server
 
 # not only localhost
 run sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+
+# access rights
+run echo "GRANT ALL ON *.* TO root@'%' IDENTIFIED BY 'root4mysql' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql
+run sleep 5
 
 expose 3306
 
