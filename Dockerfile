@@ -1,6 +1,6 @@
 from base
 
-maintainer Alexandre Bulté
+maintainer Alexandre Bulté "alexandre@bulte.net"
 
 # https://github.com/dotcloud/docker/issues/1024
 run dpkg-divert --local --rename --add /sbin/initctl
@@ -14,5 +14,4 @@ run apt-get install -y mysql-server
 
 expose 3306
 
-ADD ./start-mysql.sh /tmp/start-mysql.sh
-RUN /bin/sh /tmp/start-mysql.sh
+CMD ["/usr/bin/mysqld_safe"]
